@@ -1,0 +1,36 @@
+%canvas{id: id, height: height}
+
+:javascript
+  var StackedbarChart = {
+    labels: #{labels.to_json.html_safe},
+    datasets: #{datasets.to_json.html_safe}
+  };
+
+  var StackedbarChartOptions = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'right',//this option is used for place legend on the right side of bar chart
+      }
+    },
+    scales: {
+      x: {
+        stacked: true,// this option is used to make the bars stacked
+      },
+      y: {
+        stacked: true
+      }
+    },
+    title: {
+      display: true,
+      text: "Chart.js Stacked Bar Chart"
+    }
+  }
+
+  var chartData = {
+    type: "bar",
+    data: StackedbarChart,
+    options: StackedbarChartOptions
+  }
+  new Chart(#{id.to_json.html_safe}, chartData);
+  console.log(#{id.to_json.html_safe});

@@ -1,0 +1,64 @@
+.row
+  .col-2
+    %h4
+      system
+    %table.table.table-condensed.table-striped.table-hover
+      %tr
+        %td swipes
+        %td= TinderAccount.sum(:total_swipes)
+      %tr
+        %td swipes past 7d
+        %td= SwipeJob.where("swipe_jobs.created_at > ?", 7.days.ago).sum(:swipes)
+      %tr
+        %td swipes past 24h
+        %td= SwipeJob.where("swipe_jobs.created_at > ?", 1.day.ago).sum(:swipes)
+      %tr
+        %td accounts
+        %td= TinderAccount.alive.count
+      %tr
+        %td banned
+        %td= TinderAccount.banned.count
+      %tr
+        %td captcha
+        %td= TinderAccount.captcha.count
+      %tr
+        %td identity
+        %td= TinderAccount.identity.count
+      %tr
+        %td logged_out
+        %td= TinderAccount.logged_out.count
+      %tr
+        %td out_of_likes
+        %td= TinderAccount.out_of_likes.count
+      %tr
+        %td proxy_error
+        %td= TinderAccount.proxy_error.count
+      %tr
+        %td shadowbanned
+        %td= TinderAccount.shadowbanned.count
+      %tr
+        %td under_review
+        %td= TinderAccount.under_review.count
+  .col-4
+    %h4
+      jobs
+
+    %table.table.table-condensed.table-striped.table-hover
+      %tr
+        %td running
+        %td= SwipeJob.running.count
+      %tr
+        %td not-check-running
+        %td= SwipeJob.not_status_check.running.count
+      %tr
+        %td total past 24 hours
+        %td= SwipeJob.past24h.count
+      %tr
+        %td failed in past 24 hours
+        %td= SwipeJob.failed.past24h.count
+      %tr
+        %td not-check failed in past 24 hours
+        %td= SwipeJob.not_status_check.failed.past24h.count
+      -# %tr
+      -#   %td not-check failed in past 24 hours
+      -#   %td= SwipeJob.not_status_check.failed.past24h.count

@@ -1,0 +1,32 @@
+%canvas#cumSwipes{height: height}
+
+:javascript
+  window.labels1 = #{cumswipes.keys.to_json.html_safe}
+  window.values1 = #{cumswipes.values.to_json.html_safe}
+  window.data1 = {
+    labels: labels1,
+    datasets: [
+    {
+      label: 'Cumulative Swipes',
+      backgroundColor: '#0d6efd',
+      borderColor: '#0d6efd',
+      data: values1,
+    }
+    ]
+  };
+  window.config1 = {
+    type: 'line',
+    data: data1,
+    options: {
+    scales: {
+        x: {
+          title: {
+            text: 'days back',
+            display: true,
+          }
+        },
+      }
+    }
+  };
+  new Chart( document.getElementById('cumSwipes'), config1);
+

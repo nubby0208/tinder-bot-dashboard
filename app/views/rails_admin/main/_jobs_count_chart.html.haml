@@ -1,0 +1,33 @@
+%canvas#jobs_count{height: height}
+
+:javascript
+  window.labels2 = #{jobs_count.keys.to_json.html_safe}
+  window.values2 = #{jobs_count.values.to_json.html_safe}
+  window.data2 = {
+    labels: labels2,
+    datasets: [{
+      label: 'Jobs Count Per Day',
+      backgroundColor: #{color.to_json.html_safe},
+      borderColor: 'rgb(255, 99, 132)',
+      data: values2,
+    }]
+  };
+  window.config2 = {
+    type: 'bar',
+    data: data2,
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        },
+        x: {
+          title: {
+            text: 'days back',
+            display: true,
+          }
+        },
+      }
+    },
+  };
+
+  new Chart(document.getElementById('jobs_count'), config2);

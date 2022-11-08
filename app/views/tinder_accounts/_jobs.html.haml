@@ -1,0 +1,58 @@
+%div.sidescroll
+  %table.table.table-condensed.table-striped.table-hover
+    %tbody
+      %th ID
+      %th Account
+      %th Video
+      %th Created
+      %th Type
+      %th Status
+      %th Result
+      %th Swipes
+      %th Target
+      %th Retries
+      -# %th Swiped
+      -# %th Matched
+      %th Started
+      %th Completed
+      %th Failed
+      %th ScheduledAt
+    - field.swipe_jobs.not_status_check.order("id desc").limit(50).each do |sj|
+      %tr
+        %td
+          - path = show_path(model_name: 'SwipeJob', id: sj.id)
+          = link_to(sj.id, path)
+        %td= sj.tinder_account.title
+        %td
+          - if sj.video_link
+            %a{href: sj.video_link, target: '_blank'}
+              %i.fas.fa-desktop
+              %span{:style => "display:none"} cancel
+        %td= sj.created_at ? ActionView::Helpers::DateHelper.time_ago_in_words(sj.created_at.in_time_zone) : nil
+        %td
+          - case sj.job_type
+          - when "recommended"
+            Rec
+          - when "likes"
+            Likes
+          - when "location_change"
+            Location Change
+          - when "limit_of_likes"
+            Limit of Like
+          - when "status_check"
+            ✔️
+          - else
+            = value
+        %td= sj.status
+        %td= sj.account_job_status_result
+        %td= sj.swipes
+        %td= sj.target
+        %td= sj.retries
+        -# %td= sj.swiped_at ? ActionView::Helpers::DateHelper.time_ago_in_words(sj.swiped_at) : nil
+        -# %td= sj.last_matched_at ? ActionView::Helpers::DateHelper.time_ago_in_words(sj.last_matched_at) : nil
+        %td= sj.started_at ? ActionView::Helpers::DateHelper.time_ago_in_words(sj.started_at.in_time_zone) : nil
+        %td= sj.completed_at ? ActionView::Helpers::DateHelper.time_ago_in_words(sj.completed_at.in_time_zone) : nil
+        %td= sj.failed_at ? ActionView::Helpers::DateHelper.time_ago_in_words(sj.failed_at.in_time_zone) : nil
+        -# %td= sj.scheduled_at ? ActionView::Helpers::DateHelper.time_ago_in_words(sj.scheduled_at) : nil
+        %td= sj.scheduled_at
+

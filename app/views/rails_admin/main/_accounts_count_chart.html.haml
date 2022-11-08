@@ -1,0 +1,33 @@
+%canvas#accounts_count{height: height}
+
+:javascript
+  window.labels2 = #{accounts_counts.keys.to_json.html_safe}
+  window.values2 = #{accounts_counts.values.to_json.html_safe}
+  window.data2 = {
+    labels: labels2,
+    datasets: [{
+      label: 'Accounts Created Per Day',
+      backgroundColor: 'lightblue',
+      borderColor: 'rgb(255, 99, 132)',
+      data: values2,
+    }]
+  };
+  window.config2 = {
+    type: 'bar',
+    data: data2,
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        },
+        x: {
+          title: {
+            text: 'days back',
+            display: true,
+          }
+        },
+      }
+    },
+  };
+
+  new Chart(document.getElementById('accounts_count'), config2);

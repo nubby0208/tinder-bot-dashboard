@@ -1,0 +1,79 @@
+en:
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one: 1h
+        other: "%{count}h"
+      half_a_minute: .5m
+      less_than_x_minutes:
+        one: <1m
+        other: <%{count}m
+      less_than_x_seconds:
+        one: <1s
+        other: <%{count}s
+      over_x_years:
+        one: over 1 year
+        other: over %{count} years
+      x_days:
+        one: 1 day
+        other: "%{count} days"
+      x_minutes:
+        one: 1m
+        other: "%{count}m"
+      x_months:
+        one: 1 month
+        other: "%{count} months"
+      x_seconds:
+        one: 1s
+        other: "%{count}s"
+    prompts:
+      day: Day
+      hour: Hour
+      minute: Minute
+      month: Month
+      second: Seconds
+      year: Year
+  admin:
+    scopes:
+      _all: "All"
+      tinder_account:
+        profile_deleted: "X"
+        scheduled: "📅"
+        not_scheduled: "No 📅"
+    actions:
+      # request_viewer:
+      #   title: 'request viewer'
+      #   breadcrumb: 'request viewer'
+      #   menu: 'request viewer'
+      cancel_all_jobs:
+        title: 'cancel all'
+        breadcrumb: 'cancel all'
+        menu: 'cancel all'
+      launch_browser:
+        title: 'Launch Browser'
+        breadcrumb: 'Launch Browser'
+        menu: 'Launch Browser'
+      logs:
+        title: 'logs'
+        breadcrumb: 'logs'
+        menu: 'logs'
+      status_check:
+        title: 'Check Status'
+        breadcrumb: 'Check Status'
+        menu: 'Check Status'
+      dashboard2:
+        title: 'Admin'
+        breadcrumb: 'Admin'
+        menu: 'Admin'
+      stats:
+        title: 'Stats'
+        breadcrumb: 'Stats'
+        menu: 'Stats'
+      retry:
+        title: 'retry'
+        breadcrumb: 'retry'
+        menu: 'retry'
+      cancel:
+        title: 'cancel'
+        breadcrumb: 'cancel'
+        menu: 'cancel'

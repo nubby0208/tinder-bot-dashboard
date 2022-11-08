@@ -1,0 +1,16 @@
+k8s
+
+%h2 namespaces
+
+%table
+  - @namespaces.each do |line|
+    %tr
+      - line.split(" ").each do |cell|
+        %td= cell
+
+%table
+  - @pods.each do |line|
+    %tr
+      - line.split(" ").each do |cell|
+        %tr
+          %td= cell

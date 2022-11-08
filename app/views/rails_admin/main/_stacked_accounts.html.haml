@@ -1,0 +1,37 @@
+%canvas#accountBreakdown{height: height}
+
+:javascript
+  var StackedbarChart = {
+    labels: #{(0..(accounts.first[1].size)).to_a.reverse.to_json.html_safe},
+    datasets: #{TinderAccount.datasets.to_json.html_safe}
+  };
+
+  var StackedbarChartOptions = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'right',//this option is used for place legend on the right side of bar chart
+      }
+    },
+    scales: {
+      x: {
+        stacked: true,// this option is used to make the bars stacked
+      },
+      y: {
+        stacked: true
+      }
+    },
+    title: {
+      display: true,
+      text: "Chart.js Stacked Bar Chart"
+    }
+  }
+
+  window.onload = function () {
+    var chartData = {
+      type: "bar",
+      data: StackedbarChart,
+      options: StackedbarChartOptions
+    }
+    new Chart("accountBreakdown", chartData);
+  };

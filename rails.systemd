@@ -1,0 +1,15 @@
+[Unit]
+Description=Puma HTTP Server
+After=network.target
+# Requires=puma.socket
+
+[Service]
+Type=simple
+User=bijan
+WorkingDirectory=/home/bijan/tinderbot2/rails
+Environment=RAILS_ENV=production PORT=5000
+ExecStart=/home/bijan/.rbenv/shims/bundle exec puma -C config/puma.rb
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

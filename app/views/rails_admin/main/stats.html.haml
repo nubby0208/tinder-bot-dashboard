@@ -1,0 +1,60 @@
+.row
+  %h5
+    Swipes
+  .col-4
+    = render partial: 'dailyswipes_chart', locals: { height: 200, daily_swipes: @daily_swipes }
+  .col-4
+    = render partial: 'cumswipes_chart', locals: { height: 200, cumswipes: @cumswipes }
+  -# .col-4
+  -#   = render partial: 'accounts_count_chart', locals: { accounts_counts: @accounts_counts }
+
+.row
+  %h5
+    Accounts
+  .col-4
+    = render partial: 'accounts_count_chart', locals: { height: 200, accounts_counts: @accounts_counts }
+  -# .col-4
+  -#   - if current_user.admin?
+  -#     = render partial: 'stacked_accounts', locals: { height: 200, accounts: @accounts }
+
+.row
+  %h5
+    Jobs
+  -# .col-4
+  -#   = render partial: 'jobs_count_chart', locals: { color: 'green', height: 200, jobs_count: @jobs_count }
+  .col-4
+    Regular Jobs
+    = render partial: 'jobs_stacked', locals: { id: 'jobs1', height: 200, labels: @jobs_stacked, datasets: @jobs_stacked_datasets }
+  .col-4
+    Status Checks
+    = render partial: 'jobs_stacked', locals: { id: 'jobs2', height: 200, labels: @jobs_stacked, datasets: @jobs_stacked_datasets_checks }
+
+.row
+  .col-md-4.col-sm-6
+    %table.table.table-condensed.table-striped.table-hover.col-md-4.col-sm-6
+      %h4
+        swipes
+      %tr
+        %td Name:
+        %td= current_user.name
+      %tr
+        %td accounts:
+        %td= current_user.tinder_accounts.count
+      %tr
+        %td swipes:
+        %td= current_user.tinder_accounts.sum(:total_swipes)
+      %tr
+        %td swipes last 7 days:
+        %td= current_user.swipe_jobs.where("swipe_jobs.created_at > ?", 7.days.ago).sum(:swipes)
+      %tr
+        %td swipes last 24 hours:
+        %td= current_user.swipe_jobs.where("swipe_jobs.created_at > ?", 1.day.ago).sum(:swipes)
+
+  .col-md-4.col-sm-6
+    %table.table.table-condensed.table-striped.table-hover.col-md-4.col-sm-6
+      %h4
+        accounts
+      - Hash[current_user.tinder_accounts.group(:status).count.sort].each do |k,v|
+        %tr
+          %td= k
+          %td= v

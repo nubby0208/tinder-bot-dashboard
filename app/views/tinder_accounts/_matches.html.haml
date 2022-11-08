@@ -1,0 +1,15 @@
+%div.sidescroll
+  %table.table.table-condensed.table-striped.table-hover
+    %tbody
+      %th ID
+      %th Name
+      %th Created
+      %th Tinder ID
+      %th Created Ago
+    - field.matches.order("id desc").limit(10).each do |match|
+      %tr
+        %td= match.id
+        %td= match.name
+        %td= match.created_at
+        %td= match.tinder_user_id
+        %td= ActionView::Helpers::DateHelper.time_ago_in_words(match.created_at.in_time_zone)

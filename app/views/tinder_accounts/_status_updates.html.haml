@@ -1,0 +1,15 @@
+%div.sidescroll
+  %table.table.table-condensed.table-striped.table-hover
+    %tbody
+      %th Job ID
+      %th CreatedAt
+      %th BeforeStatus
+      %th AfterStatus
+    - field.account_status_updates.order("id desc").each do |su|
+      %tr
+        %td
+          - if su.swipe_job_id
+            = link_to(su.swipe_job_id, rails_admin.show_path(model_name: 'swipe_job', id: su.swipe_job_id))
+        %td= "#{ActionView::Helpers::DateHelper.time_ago_in_words(su.created_at.in_time_zone)} ago"
+        %td= su.before_status
+        %td= su.status

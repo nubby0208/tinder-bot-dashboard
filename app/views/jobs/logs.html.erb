@@ -1,0 +1,44 @@
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+    <title>Tinderbot</title>
+    <meta content="width=device-width,initial-scale=1" name="viewport"/>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://unpkg.com/jquery.terminal/js/jquery.terminal.min.js"></script>
+    <link href="https://unpkg.com/jquery.terminal/css/jquery.terminal.min.css" rel="stylesheet"></link>
+  </head>
+  <body>
+    <script>
+      document.addEventListener('DOMContentLoaded', function(event) {
+        App.cable.subscriptions.create({ channel: "JobsChannel", id: <%= @id %>}, {
+          connected() {
+            console.log("Connected to the channel:", this);
+          },
+          disconnected() {
+            console.log("Disconnected");
+          },
+          received(data) {
+            console.log("Received some data:", data);
+            window.term.echo(data)
+          }
+          });
+
+      window.term = $('body').terminal({
+          write: function(msg) {
+            this.echo(msg);
+          },
+          hello: function(what) {
+            this.echo('Hello, ' + what + '. Wellcome to this terminal.');
+          }
+      }, {
+          greetings: 'My First Web Terminal'
+      });
+      }, { once: true })
+
+    </script>
+  </body>
+</html>
